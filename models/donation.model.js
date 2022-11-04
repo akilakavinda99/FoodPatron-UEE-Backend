@@ -45,8 +45,9 @@ const donationSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  donationEndDate: {
-    type: Date,
+  shareContactDetails: {
+    type: Boolean,
+    default: false,
   },
 });
 

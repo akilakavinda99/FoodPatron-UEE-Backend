@@ -36,17 +36,17 @@ const createDonation = async (req, res) => {
       location,
       contactNumber,
       donationDescription,
-      donationEndDate,
+      shareContactDetails,
     } = req.body;
     const newDonation = new Donation({
       userID,
       donationTitle,
       email,
       location,
-      donationEndDate,
       contactNumber,
       donationImage: donationImage,
       donationDescription,
+      shareContactDetails,
     });
 
     newDonation
