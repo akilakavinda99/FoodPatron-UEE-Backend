@@ -19,7 +19,7 @@ router.put("/update/:id", updateFund);
 router.delete("/delete/:id", deleteFund);
 router.put("/remove/:id", removeFund);
 router.get("/status/:status", getFundByStatus);
-router.get("/:oranizationID/", getOrganizationFunds);
+router.get("/organizationfund/:id/", getOrganizationFunds);
 router.get("/:organizationID/status/:status", getFundByOrganizationAndStatus);
 
 module.exports = router;
