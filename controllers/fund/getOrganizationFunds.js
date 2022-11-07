@@ -1,13 +1,37 @@
 const Fund = require("../../models/fund.model");
+const { getNumOfDonations } = require("./getNumOfDonations");
 
 const getOrganizationFunds = async (req, res) => {
     try {
         const organizationID = req.params.id;
 
         await Fund.find({ organizationID: organizationID })
-            .then((funds) => {
+            .then(async (funds) => {
+                // get the number of donors
+                // funds.forEach(async (fund) => {
+                //     fund.numOfDonations = await getNumOfDonations(fund._id);
+                // });
+
+                // funds = funds.map(async (fund) => {
+                //     return {
+                //         ...fund._doc,
+                //         numOfDonations: await getNumOfDonations(fund._id)
+                //     }
+                // })
+                let result = await Promise.all(
+                    funds.map(async (fund) => {
+                        return {
+                            ...fund._doc,
+                            numOfDonations: await getNumOfDonations(fund._id)
+                        }
+                    })
+                )
+
+                // console.log(result);
+
+
                 res.status(200).send({
-                    funds
+                    result
                 });
             }).catch((err) => {
                 res.status(500).send({

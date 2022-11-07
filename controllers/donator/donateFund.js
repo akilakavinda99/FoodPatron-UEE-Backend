@@ -19,7 +19,7 @@ const donateToFund = async (req, res) => {
             // var previousAmount = fund.currentAmount;
             var newAmount = parseInt(amount) + fund.currentAmount;
             var updateFund = {}
-            if (newAmount === fund.budget) {
+            if (newAmount > fund.budget) {
               updateFund = {
                 currentAmount: newAmount,
                 status: "completed"
