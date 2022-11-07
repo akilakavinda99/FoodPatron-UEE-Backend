@@ -1,0 +1,12 @@
+# ignore node_modules
+node_modules
+# ignore npm-debug.log
+npm-debug.log
+# ignore .DS_Store
+.DS_Store
+# ignore .idea
+.idea
+# ignore .vscode
+.vscode
+# ignore .vs
+.vs
