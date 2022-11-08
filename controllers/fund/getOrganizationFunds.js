@@ -5,19 +5,9 @@ const getOrganizationFunds = async (req, res) => {
     try {
         const organizationID = req.params.id;
 
-        await Fund.find({ organizationID: organizationID })
+        await Fund.find({ organizationID: organizationID, 
+            status: { $in: ["approved", "pending", "completed"] } })
             .then(async (funds) => {
-                // get the number of donors
-                // funds.forEach(async (fund) => {
-                //     fund.numOfDonations = await getNumOfDonations(fund._id);
-                // });
-
-                // funds = funds.map(async (fund) => {
-                //     return {
-                //         ...fund._doc,
-                //         numOfDonations: await getNumOfDonations(fund._id)
-                //     }
-                // })
                 let result = await Promise.all(
                     funds.map(async (fund) => {
                         return {
@@ -26,10 +16,7 @@ const getOrganizationFunds = async (req, res) => {
                         }
                     })
                 )
-
-                // console.log(result);
-
-
+                
                 res.status(200).send({
                     result
                 });
