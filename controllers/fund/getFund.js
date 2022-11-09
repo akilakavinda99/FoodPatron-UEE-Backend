@@ -4,10 +4,10 @@ const { getNumOfDonations } = require("./getNumOfDonations");
 const getFund = (req, res) => {
     try {
         Fund.findById(req.params.id)
-            .then(async(fund) => {
-                fund.numOfDonations = await getNumOfDonations(fund._id);
+            .then(async (fund) => {
+                let numOfDonations = await getNumOfDonations(fund._id);
                 res.status(200).send({
-                    fund
+                    fund, numOfDonations
                 });
             })
             .catch((err) => {
@@ -43,6 +43,6 @@ const getFundByStatus = (req, res) => {
 
 
 module.exports = {
-    getFund, 
+    getFund,
     getFundByStatus
 };
