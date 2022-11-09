@@ -1,9 +1,11 @@
 const Fund = require("../../models/fund.model");
+const { getNumOfDonations } = require("./getNumOfDonations");
 
 const getFund = (req, res) => {
     try {
         Fund.findById(req.params.id)
-            .then((fund) => {
+            .then(async(fund) => {
+                fund.numOfDonations = await getNumOfDonations(fund._id);
                 res.status(200).send({
                     fund
                 });
