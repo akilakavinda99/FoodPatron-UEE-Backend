@@ -2,7 +2,7 @@ const Fund = require("../../models/fund.model");
 
 const getAllFunds = (req, res) => {
     try {
-        Fund.find({ status: { $in: ["approved", "pending", "completed"] } })
+        Fund.find({ status: { $in: ["approved", "pending"] } })
             .then((funds) => {
                 res.json(funds);
             }).catch((err) => {
