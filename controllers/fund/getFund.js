@@ -25,9 +25,17 @@ const getFund = (req, res) => {
 const getFundByStatus = (req, res) => {
     try {
         Fund.find({ status: req.params.status })
-            .then((funds) => {
+            .then(async (funds) => {
+                let result = await Promise.all(
+                    funds.map(async (fund) => {
+                        return {
+                            ...fund._doc,
+                            numOfDonations: await getNumOfDonations(fund._id)
+                        }
+                    })
+                )
                 res.status(200).send({
-                    funds
+                    funds: result
                 });
             })
             .catch((err) => {
