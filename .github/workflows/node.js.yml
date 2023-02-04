@@ -1,0 +1,29 @@
+name: Node.js Server
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  run-server:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Start Node.js server
+        working-directory: authentication_server
+        env:
+          AUTH_MONGO_URL: ${{ secrets.AUTH_MONGO_URL }}
+        run: |
+          npm ci
+          npm run build 
+          npm run test
